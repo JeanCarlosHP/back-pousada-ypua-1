@@ -7,16 +7,12 @@ export class ReservaRepository extends Repository<ReservaEntity> {
 
     private reservas: ReservaEntity[] = [];
 
-    async searchByCode(codigo: string) {
-        const possivelReserva = this.reservas.find(
-            reservaSalvo => reservaSalvo.codigo === codigo
-        );
+    async searchByCode(codigo: string): Promise<ReservaEntity> {
+        const reserva = this.reservas.find((reserva) => reserva.codigo === codigo);
 
-        if (!possivelReserva) {
-            throw new Error('Reserva nao existe');
-        }
+        console.log("reserva:", reserva);
 
-        return possivelReserva;
+        return reserva;
     }
 
     async searchByName(nome: string): Promise<ReservaEntity[]> {

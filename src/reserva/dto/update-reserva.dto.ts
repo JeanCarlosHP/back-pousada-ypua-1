@@ -1,4 +1,4 @@
-import { IsEnum, IsString, IsNumber, IsDate, IsOptional } from 'class-validator';
+import { IsEnum, IsOptional } from 'class-validator';
 import { StatusReserva } from '../enum/StatusReserva.enum';
 import { ApiProperty } from '@nestjs/swagger';
 

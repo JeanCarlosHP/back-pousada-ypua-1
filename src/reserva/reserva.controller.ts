@@ -32,6 +32,8 @@ export class ReservaController {
   @ApiOperation({ summary: 'Atualiza uma reserva' })
   @Put('/:id')
   async updateReserva(@Param('id') id: string, @Body() dadosReserva: UpdateReservaDTO) {
+    console.log('id', id);
+    console.log('dadosReserva', dadosReserva);
     const reservaAtualizado = await this.reservaService.updateReserva(id, dadosReserva);
 
     return {

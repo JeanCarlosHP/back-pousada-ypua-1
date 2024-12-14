@@ -34,6 +34,9 @@ export class ReservaEntity{
     @DeleteDateColumn({name: 'deleted_at'})
     deletedAt:string;
 
+    @Column({name:'usuarioId', nullable:false})
+    usuarioId:string;
+
     @ManyToOne(()=>UsuarioEntity, (usuario)=>usuario.reservas)
     usuario:UsuarioEntity
 
