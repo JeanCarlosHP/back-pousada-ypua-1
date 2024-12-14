@@ -15,6 +15,16 @@ export class AutenticacaoGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<RequiscaocomUsuario>();
     const token = this.extrairTokenDoCabecalho(request);
+    const route = request.route.path;
+    const method = request.route.stack[0].method;
+
+    if (route === '/usuario' && method === 'post') {
+      return true;
+    }
+
+    if (route === '/acomodacao' && method === 'get') {
+      return true;
+    }
 
     if (!token) {
       throw new UnauthorizedException('Erro de autenticação');
