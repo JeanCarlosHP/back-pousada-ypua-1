@@ -1,14 +1,20 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { ReservaRepository } from '../reserva/reserva.repository';
 import { StatusReserva } from '../reserva/enum/StatusReserva.enum';
+import { ReservaEntity } from 'src/reserva/reserva.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class CheckinService {
-  constructor(private readonly reservaRepository: ReservaRepository) {}
+  constructor(
+    @InjectRepository(ReservaEntity)
+    private readonly reservaRepository: Repository<ReservaEntity>
+  ) {}
 
   async realizarCheckin(codigo: string): Promise<string> {
     try {
-      const reserva = await this.reservaRepository.searchByCode(codigo);
+      const reserva = await this.reservaRepository.findOneBy({ codigo });
+      
       if (!reserva) {
         throw new NotFoundException('Reserva não encontrada.');
       }

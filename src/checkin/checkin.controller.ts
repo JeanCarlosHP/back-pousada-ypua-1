@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Param, Query } from '@nestjs/common';
 import { CheckinService } from './checkin.service';
 
 @Controller('/checkin')
@@ -6,7 +6,7 @@ export class CheckinController {
   constructor(private readonly checkinService: CheckinService) {}
 
   @Post()
-  async realizarCheckin(@Body('codigo') codigo?: string) {
+  async realizarCheckin(@Query('codigo') codigo?: string) {
     return await this.checkinService.realizarCheckin(codigo);
   }
 }
