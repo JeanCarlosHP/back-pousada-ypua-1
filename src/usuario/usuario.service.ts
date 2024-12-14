@@ -31,8 +31,14 @@ export class UsuarioService{
     }
 
     async deleteUsuario(id:string){
-        await this.usuarioRepository.delete(id);
-
+        try {
+            await this.usuarioRepository.delete(id);
+        } catch (error) {
+            if (error instanceof Error && error.message.includes('violates foreign key constraint')) {
+                throw new Error('Não é possível excluir o usuário pois ele tem reservas.');
+            }
+            throw error;
+        }
     }
 
     async buscaPorEmail(email:string){

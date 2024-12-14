@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { CreateUsuarioDTO } from "./dto/CreateUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
 import { v4 as uuid} from 'uuid'
@@ -82,13 +82,19 @@ export class UsuarioController{
 
     @ApiOperation({summary:'Deleta um usuario'})
     @Delete('/:id')
-    async deleteUsuario(@Param('id') id: string)
-    {
-        const usuarioDeleted = await this.usuarioService.deleteUsuario(id);
-
-        return{
-            usuario: usuarioDeleted,
-            message:'usuario removido com sucesso!'
+    async deleteUsuario(@Param('id') id: string) {
+        try {
+            const usuarioDeleted = await this.usuarioService.deleteUsuario(id);
+            return {
+                usuario: usuarioDeleted,
+                message: 'usuario removido com sucesso!'
+            }
+        } catch (error) {
+            throw new HttpException({
+                status: HttpStatus.BAD_REQUEST,
+                message: error.message,
+            }, HttpStatus.BAD_REQUEST);
         }
+        
     }
 }
