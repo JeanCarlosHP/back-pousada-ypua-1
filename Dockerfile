@@ -17,5 +17,8 @@ COPY . .
 # Define a porta de exposição (opcional)
 EXPOSE 3000
 
+# Comando para executar as migrations
+CMD ["npm", "run", "typeorm-migrate"]
+
 # Comando para executar a aplicação
 CMD ["npm", "run", "start:dev"] 
