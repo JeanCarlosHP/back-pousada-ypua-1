@@ -9,6 +9,21 @@
       "database": "ypua",
       "username": "postgres",
       "password": "root"
+    },
+    {
+      "pgOptions": {
+        "ssl": {
+          "rejectUnauthorized": true
+        }
+      },
+      "previewLimit": 50,
+      "server": "dpg-ctfndurgbbvc73df78tg-a.ohio-postgres.render.com",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Ypua production",
+      "database": "ypua",
+      "username": "ypua",
+      "password": "Bw8YtU3CE1yC8MCSbTedDKxEtAcLrghf"
     }
   ]
 }
